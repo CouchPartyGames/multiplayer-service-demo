@@ -1,0 +1,36 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: agones-appset
+  namespace: argocd
+spec:
+  generators:
+  - list: 
+      # Parameters are generated based on this cluster list, to be substituted
+      # into the template below.
+      elements: 
+      - cluster: "in-cluster"
+        region: "local"
+  template:
+    metadata:
+      name: 'agones-{{region}}'
+
+    spec:
+      project: infra
+
+      source:
+        chart: agones
+        repoURL: https://agones.dev/chart/stable
+        targetRevision: 1.24.0
+
+      destination:
+        name: in-cluster
+        namespace: agones-system
+
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+        retry:
+          limit: 3
