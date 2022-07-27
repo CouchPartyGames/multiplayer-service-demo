@@ -3,21 +3,25 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: agones-appset
+  namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - region: us-east
-        provider: gcp
-        cluster: gcp-us_east
+  - list: 
+      # Parameters are generated based on this cluster list, to be substituted
+      # into the template below.
+      elements: 
+      - cluster: "in-cluster"
+        region: "us-east"
+        provider: "gcp"
   template:
     metadata:
-      name: 'agones-{{ region }}'
+      name: 'agones-{{region}}'
       labels:
-        region: {{ region }}
-        provider: {{ provider }}
+        region: {{region}}
+        provider: {{provider}}
+        env: prod
     spec:
-      project: infra
+      project: agones-prod
 
       source:
         chart: agones
@@ -26,7 +30,7 @@ spec:
 
       destination:
         name: '{{cluster}}'
-        namespace: guestbook
+        namespace: agones-system
 
       syncPolicy:
         syncOptions:

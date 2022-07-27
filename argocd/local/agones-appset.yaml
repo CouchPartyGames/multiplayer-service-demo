@@ -12,6 +12,7 @@ spec:
       elements: 
       - cluster: "in-cluster"
         region: "local"
+        version: "1.24.0"
   template:
     metadata:
       name: 'agones-{{region}}'
@@ -22,10 +23,10 @@ spec:
       source:
         chart: agones
         repoURL: https://agones.dev/chart/stable
-        targetRevision: 1.24.0
+        targetRevision: {{version}}
 
       destination:
-        name: in-cluster
+        name: '{{cluster}}'
         namespace: agones-system
 
       syncPolicy:
