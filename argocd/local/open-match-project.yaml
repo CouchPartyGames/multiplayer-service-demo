@@ -1,27 +1,29 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: infra
+  name: matchmaking-local
   namespace: argocd
+
+  labels:
+    environment: local
 
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  # Project description
-  description: Local Infrastructure
+  description: Game Matchmaking Service for Local Environment
 
-  # Allow manifests to deploy from any Git repos
   sourceRepos:
-  - 'https://agones.dev/chart/stable'
+  - 'https://open-match.dev/chart/stable'
 
   destinations:
-  - namespace: agones-system
-    name: in-cluster
-  - namespace: default
-    name: in-cluster
-  - namespace: kube-system
-    name: in-cluster
+  - namespace: '*'
+    server: https://kubernetes.default.svc
+  #- namespace: kube-system
+  #  server: https://kubernetes.default.svc
+  #- namespace: default
+  #  server: https://kubernetes.default.svc
 
   clusterResourceWhitelist:
   - group: '*'

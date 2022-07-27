@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: agones-appset
+  name: open-match-appset
   namespace: argocd
 
   labels:
@@ -10,27 +10,26 @@ metadata:
 spec:
   generators:
   - list: 
-      # Parameters are generated based on this cluster list, to be substituted
-      # into the template below.
       elements: 
-      - cluster: "in-cluster"
+      - cluster: https://kubernetes.default.svc
         region: "local"
-        version: "1.24.0"
+        version: "1.3.0"
   template:
     metadata:
-      name: 'agones-{{region}}'
-
+      name: 'open-match-{{region}}'
+      labels:
+        region: '{{region}}'
     spec:
-      project: hosting-local
+      project: matchmaking-local
 
       source:
-        chart: agones
-        repoURL: https://agones.dev/chart/stable
+        chart: open-match
+        repoURL: https://open-match.dev/chart/stable
         targetRevision: '{{version}}'
 
       destination:
-        name: '{{cluster}}'
-        namespace: agones-system
+        server: '{{cluster}}'
+        namespace: open-match
 
       syncPolicy:
         syncOptions:
