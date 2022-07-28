@@ -27,6 +27,12 @@ spec:
         chart: open-match
         repoURL: https://open-match.dev/chart/stable
         targetRevision: '{{version}}'
+        # >= ArgoCD 2.5 
+        #externalValueFiles:
+        #- repoURL: 'git@bitbucket.org:repo3/path.git'
+        #  targetRevision: main
+        #  valueFiles:
+        #    - values.yaml
 
       destination:
         server: '{{cluster}}'
