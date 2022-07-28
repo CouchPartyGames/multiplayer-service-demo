@@ -1,0 +1,15 @@
+agones:
+  featureGates: ""
+
+  metrics:
+    prometheusEnabled: true
+
+
+gameservers:
+  namespaces:
+    - default
+    - xbox
+    - linux
+
+  minPort: 5000
+  maxPort: 9000
