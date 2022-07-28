@@ -1,11 +1,49 @@
 agones:
-  featureGates: ""
+
+  # https://agones.dev/site/docs/guides/feature-stages/#feature-gates
+  featureGates: "PlayerTracking=true"
 
   metrics:
     prometheusEnabled: true
 
 
+  allocator:
+    generateTLS: false
+    generateClientTLS: false
+    
+    annotations:
+      region: test
+
+    #tolerations:
+    #  - test
+
+  controller:
+    generateTLS: false
+
+    logLevel: info
+
+    #tolerations:
+    #  - test
+
+  ping:
+    install: true
+
+    replicas: 2
+
+    http:
+      annotations:
+        region: test
+
+    udp:
+      annotations:
+        region: test
+    
+    #tolerations:
+    #  - test
+
+
 gameservers:
+
   namespaces:
     - default
     - xbox
