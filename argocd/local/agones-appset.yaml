@@ -20,6 +20,9 @@ spec:
     metadata:
       name: 'agones-{{region}}'
 
+      labels:
+        region: '{{region}}'
+        environment: local
     spec:
       project: hosting-local
 
