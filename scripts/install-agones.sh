@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+#	Find Available Chart Versions
+# helm search repo --versions agones/agones
 
 helm repo add agones https://agones.dev/chart/stable
 helm repo update
