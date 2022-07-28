@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: customer-games
+  namespace: argocd
+
+  labels:
+    environment: local
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Customer Fleets (Games) for Agones (Dedicated Hosting)
+
+  sourceRepos:
+  - 'https://couchpartygames.github.io/fleet'
+
+  destinations:
+  - namespace: '*'
+    name: in-cluster
+
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
