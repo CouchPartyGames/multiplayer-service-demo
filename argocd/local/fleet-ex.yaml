@@ -1,0 +1,35 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fleet-game-example
+  namespace: argocd
+
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+  labels:
+    name: guestbook
+
+spec:
+  project: customer
+
+  source:
+    chart: fleet
+    repoURL: https://couchpartygames.github.io/fleet
+    targetRevision: 1.0.4
+    #helm:
+    #  valueFiles:
+    #  - some-game.yaml
+    #  - some-game.enc.yaml
+
+  destination:
+    name: in-cluster
+    namespace: customer-games
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 3
