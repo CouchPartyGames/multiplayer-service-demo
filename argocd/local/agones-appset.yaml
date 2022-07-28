@@ -30,6 +30,10 @@ spec:
         chart: agones
         repoURL: https://agones.dev/chart/stable
         targetRevision: '{{version}}'
+        helm:
+          parameters:
+            - name: "agones.ping.install"
+              value: "false"
         # >= ArgoCD 2.5 
         #externalValueFiles:
         #- repoURL: 'git@bitbucket.org:repo3/path.git'
@@ -42,8 +46,13 @@ spec:
         namespace: agones-system
 
       syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
         retry:
           limit: 3
+          backoff:
+            duration: 15s

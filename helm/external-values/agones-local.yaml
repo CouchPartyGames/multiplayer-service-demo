@@ -1,0 +1,54 @@
+agones:
+
+  # https://agones.dev/site/docs/guides/feature-stages/#feature-gates
+  featureGates: "PlayerTracking=true"
+
+  metrics:
+    prometheusEnabled: false
+
+
+  allocator:
+    generateTLS: false
+    generateClientTLS: false
+    
+    annotations:
+      region: test
+
+    #tolerations:
+    #  - test
+
+  controller:
+    generateTLS: false
+
+    logLevel: info
+
+    #tolerations:
+    #  - test
+
+  ping:
+    install: false
+
+    replicas: 1
+
+    http:
+      expose: false
+      annotations:
+        region: test
+
+    udp:
+      expose: false
+      annotations:
+        region: test
+    
+    #tolerations:
+    #  - test
+
+
+gameservers:
+
+  namespaces:
+    - default
+    - linux
+
+  minPort: 7000
+  maxPort: 8000
