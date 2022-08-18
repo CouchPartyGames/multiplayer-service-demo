@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-cd
+  namespace: argocd
+
+  labels:
+    environment: local
+
+spec:
+  project: argo-projects
+
+  revisionHistoryLimit: 3
+
+  source:
+    chart: argo-cd
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 4.10.7
+    helm:
+      values: |
+        extraObjects: []
+
+  destination:
+    name: in-cluster
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
