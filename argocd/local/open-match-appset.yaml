@@ -44,6 +44,8 @@ spec:
         namespace: open-match
 
       syncPolicy:
+        automated:
+          prune: true
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
