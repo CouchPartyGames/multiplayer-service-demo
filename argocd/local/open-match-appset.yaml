@@ -13,7 +13,7 @@ spec:
       elements: 
       - cluster: https://kubernetes.default.svc
         region: "local"
-        version: "1.3.0"
+        version: "1.4.0"
   template:
     metadata:
       name: 'open-match-{{region}}'
@@ -27,6 +27,11 @@ spec:
         chart: open-match
         repoURL: https://open-match.dev/chart/stable
         targetRevision: '{{version}}'
+        helm:
+          values: |
+            open-match-override:
+              enabled: "true"
+
         # >= ArgoCD 2.5 
         #externalValueFiles:
         #- repoURL: 'git@bitbucket.org:repo3/path.git'
