@@ -23,8 +23,23 @@ spec:
     targetRevision: 1.0.4
     chart: fleet
     helm:
-      valueFiles:
-      - values.yaml
+      values: |
+        fleet:
+          name: "marble-madness"
+          labels:
+            game-version: 0.0.1
+
+        gameServer:
+          container:
+          - name: "marble-madness"
+            image: ""
+  
+      #externalValueFiles:
+      #  - repoURL: 'git@bitbucket.org:repo3/path.git'
+      #    targetRevision: main
+      #    valueFiles:
+      #      - games/marble-madness/fleet.yaml
+      #      - games/marble-madness/secrets.yaml
 
   destination:
     name: in-cluster
