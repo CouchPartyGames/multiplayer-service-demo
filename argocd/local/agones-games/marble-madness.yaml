@@ -1,0 +1,43 @@
+---
+# Example Dedicated Game using Agones
+#
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: marble-madness
+  namespace: argocd
+
+  #finalizers:
+  #  - resources-finalizer.argocd.argoproj.io
+
+  labels:
+    name: marble-madness
+    region: local
+    environment: local
+spec:
+
+  project: default
+
+  source:
+    repoURL: https://couchpartygames.github.io/fleet
+    targetRevision: 1.0.4
+    chart: fleet
+    helm:
+      valueFiles:
+      - values.yaml
+
+  destination:
+    name: in-cluster
+    namespace: marble-madness
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 15s
+        maxDuration: 2m

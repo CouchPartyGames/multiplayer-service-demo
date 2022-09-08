@@ -1,0 +1,35 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: agones-games-local
+  namespace: argocd
+
+  labels:
+    environment: local
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # Project description
+  description: Dedicated Game Hosting for Local Environment
+
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+  - 'https://couchpartygames.github.io/fleet'
+
+  destinations:
+  - namespace: '!agones-system'
+    name: *
+  - namespace: '!kube-system'
+    name: *
+  - namespace: *
+    name: *
+
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
