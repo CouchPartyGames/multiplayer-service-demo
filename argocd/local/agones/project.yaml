@@ -17,12 +17,9 @@ spec:
   # Allow manifests to deploy from any Git repos
   sourceRepos:
   - 'https://agones.dev/chart/stable'
-  - 'https://open-match.dev/chart/stable'
 
   destinations:
   - namespace: agones-system
-    name: in-cluster
-  - namespace: open-match
     name: in-cluster
   - namespace: default
     name: in-cluster
