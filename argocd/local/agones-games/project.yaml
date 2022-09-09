@@ -2,11 +2,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: agones-games-local
+  name: games
   namespace: argocd
 
   labels:
     environment: local
+    region: local
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -20,11 +21,11 @@ spec:
 
   destinations:
   - namespace: '!agones-system'
-    name: *
+    name: '*'
   - namespace: '!kube-system'
-    name: *
-  - namespace: *
-    name: *
+    name: '*'
+  - namespace: '*'
+    name: '*'
 
   clusterResourceWhitelist:
   - group: '*'

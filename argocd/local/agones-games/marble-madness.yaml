@@ -16,11 +16,13 @@ metadata:
     environment: local
 spec:
 
-  project: default
+  project: games
+
+  revisionHistoryLimit: 4
 
   source:
     repoURL: https://couchpartygames.github.io/fleet
-    targetRevision: 1.0.4
+    targetRevision: 1.0.6
     chart: fleet
     helm:
       values: |
@@ -28,11 +30,9 @@ spec:
           name: "marble-madness"
           labels:
             game-version: 0.0.1
+            region: local
+            environment: local
 
-        gameServer:
-          container:
-          - name: "marble-madness"
-            image: ""
   
       #externalValueFiles:
       #  - repoURL: 'git@bitbucket.org:repo3/path.git'
