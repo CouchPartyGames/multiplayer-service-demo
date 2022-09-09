@@ -22,15 +22,15 @@ spec:
 
   source:
     repoURL: https://couchpartygames.github.io/fleet
-    targetRevision: 1.0.8
+    targetRevision: 1.0.9
     chart: fleet
     helm:
       values: |
         fleet:
-          name: "marble-madness"
+          name: "simple-game-server"
           replicas: 1
           labels:
-            game-version: 0.0.1
+            game-version: 0.13
             region: local
             environment: local
 
@@ -38,8 +38,8 @@ spec:
         gameServer:
           container:
             - name: "simple"
-              image: gcr.io/agones-images/nodejs-simple-server
-              tag: 0.8
+              image: gcr.io/agones-images/simple-game-server
+              tag: 0.13
               port:
                 containerPort: 7654
                 protocol: UDP
@@ -48,8 +48,8 @@ spec:
                   memory: 125Mi
                   cpu: 100m
                 limits:
-                  memory: 125Mi
-                  cpu: 100m
+                  memory: 512Mi
+                  cpu: 500m
 
   
       #externalValueFiles:
