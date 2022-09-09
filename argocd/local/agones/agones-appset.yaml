@@ -26,14 +26,34 @@ spec:
     spec:
       project: hosting-local
 
+      revisionHistoryLimit: 3
+
       source:
         chart: agones
         repoURL: https://agones.dev/chart/stable
         targetRevision: '{{version}}'
         helm:
-          parameters:
-            - name: "agones.ping.install"
-              value: "false"
+          values: |
+            agones:
+              controller:
+                generateTLS: false
+              allocator:
+                generateTLS: false
+                generateClientTLS: false
+              ping:
+                install: false
+              crds:
+                cleanupOnDelete: false
+              featureGates: "PlayerTracking=true"
+
+            gameservers:
+              namespaces:
+                - default
+                - marble-madness
+
+          #parameters:
+            #- name: "agones.ping.install"
+            #  value: "false"
         # >= ArgoCD 2.5 
         #externalValueFiles:
         #- repoURL: 'git@bitbucket.org:repo3/path.git'
@@ -46,9 +66,9 @@ spec:
         namespace: agones-system
 
       syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+        #automated: {}
+          #prune: true
+          #selfHeal: true
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true

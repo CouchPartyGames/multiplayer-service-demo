@@ -11,10 +11,8 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  # Project description
   description: Dedicated Game Hosting for Local Environment
 
-  # Allow manifests to deploy from any Git repos
   sourceRepos:
   - 'https://agones.dev/chart/stable'
 
@@ -25,6 +23,8 @@ spec:
     name: in-cluster
   - namespace: kube-system
     name: in-cluster
+  - namespace: '*'			# allow games to be hosted in any namespace, argocd needs access
+    name: '*'
 
   clusterResourceWhitelist:
   - group: '*'
