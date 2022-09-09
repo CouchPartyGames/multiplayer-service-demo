@@ -8,14 +8,12 @@ metadata:
   labels:
     environment: local
     region: local
-  # Finalizer that ensures that project is not deleted until it is not referenced by any application
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+
+  #finalizers:
+  #  - resources-finalizer.argocd.argoproj.io
 spec:
-  # Project description
   description: Dedicated Game Hosting for Local Environment
 
-  # Allow manifests to deploy from any Git repos
   sourceRepos:
   - 'https://couchpartygames.github.io/fleet'
 
@@ -28,9 +26,21 @@ spec:
     name: '*'
 
   clusterResourceWhitelist:
+  #- group: 'agones.dev'
+  #  kind: 'Fleet'
+  #- group: 'autoscaling.agones.dev'
+  #  kind: 'FleetAutoscaler'
+  #- group: 'apps'
+  #  kind: 'Service'
+  #- group: 'apps'
+  #  kind: 'Deployment'
+  #- group: ''
+  #  kind: 'NetworkPolicy'
   - group: '*'
     kind: '*'
 
   namespaceResourceWhitelist:
   - group: '*'
     kind: '*'
+  #- group: 'agones.dev'
+  #  kind: 'Fleet'
