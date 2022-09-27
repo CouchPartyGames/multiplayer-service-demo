@@ -1,30 +1,32 @@
+
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-cd
+  name: harbor
   namespace: argocd
 
   labels:
     environment: local
-    purpose: cont-delivery
+    purpose: docker-registry
 
 spec:
-  project: argo-projects
+  project: harbor
 
   revisionHistoryLimit: 3
 
   source:
-    chart: argo-cd
-    repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 5.5.5
-    helm:
-      values: |
-        extraObjects: []
+    chart: harbor
+    repoURL: https://helm.goharbor.io
+    targetRevision: 1.10.0
+    #helm:
+    #  values: |
+    #    extraObjects: []
+
 
   destination:
     name: in-cluster
-    namespace: argocd
+    namespace: 
 
   syncPolicy:
     automated:
