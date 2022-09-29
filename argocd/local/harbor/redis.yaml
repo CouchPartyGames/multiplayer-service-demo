@@ -2,12 +2,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: harbor
+  name: redis
   namespace: argocd
 
   labels:
     environment: local
-    purpose: docker-registry
+    purpose: redis-sential
 
 spec:
   project: harbor
@@ -15,13 +15,9 @@ spec:
   revisionHistoryLimit: 3
 
   source:
-    chart: harbor
-    repoURL: https://helm.goharbor.io
-    targetRevision: 1.10.0
-    #helm:
-    #  values: |
-    #    extraObjects: []
-
+    chart: redis
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 17.2.0
 
   destination:
     name: in-cluster

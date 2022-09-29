@@ -14,12 +14,12 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  # Project description
-  description: Docker Registry
+  
+  description: High Availability, Multi-Tenant Docker Registry
 
-  # Allow manifests to deploy from any Git repos
   sourceRepos:
   - https://helm.goharbor.io
+  - https://charts.bitnami.com/bitnami
 
   destinations:
   - namespace: argocd
