@@ -1,0 +1,147 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-projects-sync
+  namespace: argocd
+
+  labels:
+    purpose: sync
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo
+    path: argocd/local/argo-projects
+    targetRevision: HEAD
+
+  destination:
+    namespace: default
+    name: in-cluster
+
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dedicated-games-sync
+  namespace: argocd
+
+  labels:
+    purpose: sync
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo
+    path: argocd/local/dedicated-games
+    targetRevision: HEAD
+
+  destination:
+    namespace: default
+    name: in-cluster
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dedicated-hosting-sync
+  namespace: argocd
+
+  labels:
+    purpose: sync
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo
+    path: argocd/local/dedicated-hosting
+    targetRevision: HEAD
+
+  destination:
+    namespace: default
+    name: in-cluster
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: match-making-sync
+  namespace: argocd
+
+  labels:
+    purpose: sync
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo
+    path: argocd/local/dedicated-hosting
+    targetRevision: HEAD
+
+  destination:
+    namespace: default
+    name: in-cluster
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: container-registry-sync
+  namespace: argocd
+
+  labels:
+    purpose: sync
+
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo
+    path: argocd/local/container-registry
+    targetRevision: HEAD
+
+  destination:
+    namespace: default
+    name: in-cluster
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+
