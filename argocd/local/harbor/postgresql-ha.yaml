@@ -10,7 +10,7 @@ metadata:
     purpose: database
 
 spec:
-  project: postgresql
+  project: postgresql-ha
 
   revisionHistoryLimit: 3
 
@@ -21,7 +21,7 @@ spec:
 
   destination:
     name: in-cluster
-    namespace: 
+    namespace: default
 
   syncPolicy:
     automated:

@@ -8,6 +8,7 @@ metadata:
   labels:
     environment: local
     purpose: docker-registry
+    region: local
 
 spec:
   project: harbor
@@ -25,7 +26,7 @@ spec:
 
   destination:
     name: in-cluster
-    namespace: 
+    namespace: default
 
   syncPolicy:
     automated:

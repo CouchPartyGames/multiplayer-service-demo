@@ -8,6 +8,7 @@ metadata:
   labels:
     environment: local
     purpose: redis-sential
+    region: local
 
 spec:
   project: harbor
@@ -21,7 +22,7 @@ spec:
 
   destination:
     name: in-cluster
-    namespace: 
+    namespace: default
 
   syncPolicy:
     automated:
