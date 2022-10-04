@@ -17,7 +17,7 @@ spec:
   source:
     chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 5.5.7
+    targetRevision: 5.5.8
     helm:
       values: |
         extraObjects: []

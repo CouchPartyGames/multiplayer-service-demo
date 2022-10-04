@@ -18,8 +18,8 @@ spec:
   - 'https://open-match.dev/chart/stable'
 
   destinations:
-  - namespace: '*'
-    server: https://kubernetes.default.svc
+  - namespace: open-match
+    name: in-cluster
   #- namespace: kube-system
   #  server: https://kubernetes.default.svc
   #- namespace: default
