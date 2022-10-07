@@ -13,7 +13,7 @@ spec:
       elements: 
       - cluster: https://kubernetes.default.svc
         region: "local"
-        version: "1.4.0"
+        version: "1.5.0"
   template:
     metadata:
       name: 'open-match-{{region}}'

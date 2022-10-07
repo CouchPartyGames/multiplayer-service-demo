@@ -17,10 +17,13 @@ spec:
   source:
     chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 5.5.8
+    targetRevision: 5.5.12
     helm:
       values: |
         extraObjects: []
+        server:
+          extraArgs:
+          - --enable-gzip
 
   destination:
     name: in-cluster
