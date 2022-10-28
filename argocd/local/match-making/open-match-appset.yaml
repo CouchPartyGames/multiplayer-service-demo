@@ -11,7 +11,7 @@ spec:
   generators:
   - list: 
       elements: 
-      - cluster: https://kubernetes.default.svc
+      - cluster: "in-cluster"
         region: "local"
         version: "1.5.0"
   template:
@@ -40,12 +40,13 @@ spec:
         #    - values.yaml
 
       destination:
-        server: '{{cluster}}'
+        name: '{{cluster}}'
         namespace: open-match
 
       syncPolicy:
         automated:
           prune: true
+          selfHeal: true
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true

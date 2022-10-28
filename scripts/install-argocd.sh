@@ -10,12 +10,16 @@
 
 BCRYPT_PASS="$2a$10$Nw0Uwlwv6Nv5KQSKZusrgu/ilPpgAls96ujh5/8LJQOb4FM5HgtzW"
 PASSWORD="8w3iauj3DMh9ANM9aT"
+VERSION="5.8.5"
 
 
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
 
-helm upgrade argo-cd argo/argo-cd --install --version 4.9.16 --namespace argocd --create-namespace --set "server.extraArgs={insecure}" --wait
+helm upgrade argo-cd argo/argo-cd \
+	--install \
+	--version $VERSION \
+	 --namespace argocd --create-namespace --set "server.extraArgs={--insecure}" --wait
 
 	# Remove Initial Password
 kubectl delete secret argocd-initial-admin-secret -n argocd

@@ -49,7 +49,6 @@ spec:
             gameservers:
               namespaces:
                 - default
-                - marble-madness
 
           #parameters:
             #- name: "agones.ping.install"

@@ -11,11 +11,12 @@ metadata:
   #  - resources-finalizer.argocd.argoproj.io
 
   labels:
-    game-name: simple-game-server
-    game-version: 0.13
-    game-company: CouchPartyGames
+    game-name: "simple-game-server"
+    game-version: "0.13"
+    game-company: "CouchPartyGames"
     region: local
     environment: local
+
 spec:
 
   project: games
@@ -55,6 +56,12 @@ spec:
                   memory: 512Mi
                   cpu: 500m
 
+          
+        autoScaler:
+          enabled: false
+          type: "webhook"
+          webhook: {}
+
   
       #externalValueFiles:
       #  - repoURL: 'git@bitbucket.org:repo3/path.git'
@@ -65,7 +72,7 @@ spec:
 
   destination:
     name: in-cluster
-    namespace: marble-madness
+    namespace: default
 
   syncPolicy:
     automated:
