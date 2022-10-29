@@ -22,12 +22,14 @@ spec:
       values: |
 
   destination:
-    name: 
-    namespace: 
+    name: local
+    namespace: logging
     
 
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
 

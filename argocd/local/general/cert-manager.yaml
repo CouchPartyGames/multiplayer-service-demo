@@ -1,4 +1,6 @@
 ---
+# https://cert-manager.io/docs/installation/helm/
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -26,7 +28,7 @@ spec:
           timeout: 30
 
   destination:
-    name: 
+    name: local
     namespace: cert-manager
     
 
@@ -34,4 +36,6 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
 
