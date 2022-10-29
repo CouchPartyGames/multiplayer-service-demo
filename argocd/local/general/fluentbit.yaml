@@ -1,0 +1,33 @@
+---
+# https://github.com/fluent/helm-charts
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluent-bit
+  namespace: argocd
+
+
+  #finalizers:
+  #  - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://fluent.github.io/helm-charts
+    targetRevision: 0.20.9
+    chart: fluent-bit
+    helm:
+      values: |
+
+  destination:
+    name: 
+    namespace: 
+    
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+

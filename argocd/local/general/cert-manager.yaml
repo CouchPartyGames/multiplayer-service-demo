@@ -1,0 +1,37 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+
+
+  #finalizers:
+  #  - resources-finalizer.argocd.argoproj.io
+
+  labels:
+    name: guestbook
+spec:
+  project: default
+
+  source:
+    repoURL: https://charts.jetstack.io
+    targetRevision: v1.10.0
+    chart: cert-manager
+    helm:
+      values: |
+        prometheus:
+          enabled: false
+        webhook:
+          timeout: 30
+
+  destination:
+    name: 
+    namespace: cert-manager
+    
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
