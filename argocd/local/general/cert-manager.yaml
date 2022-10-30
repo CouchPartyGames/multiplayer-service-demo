@@ -10,9 +10,10 @@ metadata:
 
   #finalizers:
   #  - resources-finalizer.argocd.argoproj.io
-
   labels:
-    name: guestbook
+    environment: local
+    purpose: certificates
+
 spec:
   project: default
 
@@ -26,9 +27,10 @@ spec:
           enabled: false
         webhook:
           timeout: 30
+        installCRDs: true
 
   destination:
-    name: local
+    name: in-cluster
     namespace: cert-manager
     
 
@@ -38,4 +40,5 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
 
