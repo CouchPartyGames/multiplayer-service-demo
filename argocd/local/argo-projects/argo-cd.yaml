@@ -17,7 +17,7 @@ spec:
   source:
     chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 5.12.2
+    targetRevision: 5.13.1
     helm:
       values: |
         extraObjects: []
@@ -28,7 +28,11 @@ spec:
 
         configs:
           cm:
-            exec.enabled: "false"
+            exec.enabled: false
+
+          params:
+            server.enable.gzip: true
+
           styles: |
             .sidebar {
               background: linear-gradient(#e66465, #9198e5);
@@ -37,9 +41,6 @@ spec:
               background: linear-gradient(to bottom, #999, #777, #333, #222, #111);
             }
 
-        server:
-          extraArgs:
-          - --enable-gzip
 
   destination:
     name: in-cluster
