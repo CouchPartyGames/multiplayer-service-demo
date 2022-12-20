@@ -32,12 +32,6 @@ spec:
             open-match-override:
               enabled: "true"
 
-        # >= ArgoCD 2.5 
-        #externalValueFiles:
-        #- repoURL: 'git@bitbucket.org:repo3/path.git'
-        #  targetRevision: main
-        #  valueFiles:
-        #    - values.yaml
 
       destination:
         name: '{{cluster}}'
