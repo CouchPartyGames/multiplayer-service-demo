@@ -1,77 +1,26 @@
-redis-ha:
-  enable: true
+crds:
+  install: false
 
+extraObjects: []
 
-controller:
-  enableStatefulSet: true
-  metrics:
-    enabled: true
-
-
-server:
-  autoscaling:
-    enabled: true
-    minReplicas: 2
-  metrics:
-    enabled: true
-  config:
-    url: https://argocd.example.com
-    admin.enabled: "true"
-    exec.enabled: "true"
-    server.rbac.log.enforce.enable: "true"
-    url: https://argocd.example.com
-    helm.valuesFileSchemes: secrets, https, secrets+gpg-import, secrets+gpg-import-kubernetes
-    kustomize.buildOptions: --enable-alpha-plugins
-    accounts.automated: apiKey
-
-
-  rbacConfig:
-    policy.csv: |
-      p, role:automate-role, clusters, create, * , allow
-      p, role:automate-role, clusters, get, * , allow
-      p, role:automate-role, clusters, delete, * , allow
-      p, role:automate-role, applications, *, */*, allow
-      g, automated, role:automate-role
-    policy.default: ''
-
-
-
-
-repoServer:
-  autoscaling:
-    enabled: true
-    minReplicas: 2
-  metrics:
-    enabled:
-
-
-
+global:
+  image:
+    tag: v2.6.0-rc1
+  logging:
+    format: json
 
 configs:
-  styles: ".nav-bar { background: linear-gradient(#e66465, #9198e5); }"
-  secret:
-    extra:
-      # Don't base64 encode
-      dex.azuread.clientId: "client-id"
-  #gpgKeys:
-  #  id: |
-  #    -----BEGIN PGP PUBLIC KEY BLOCK-----
-  #    -----END PGP PUBLIC KEY BLOCK-----
-  credentialTemplates:
-    couchpartygames-repo:
-      url: git@github.com:CouchPartyGames/demo.git
-      sshPrivateKey: |
-        --BEGIN PRIVATE KEY--
-        --END PRIVATE KEY--
-  repositories:
-    couchpartygames-github:
-      url: https://github.com/CouchPartyGames/fleet
+  cm:
+    exec.enabled: false
+    url: 'localhost'
 
+  params:
+    server.enable.gzip: true
 
-applicationSet:
-  enabled: true
-
-notifications:
-  enabled: true
-  metrics:
-    enabled: true
+  styles: |
+    .sidebar {
+      background: linear-gradient(#e66465, #9198e5);
+    }
+    .nav-bar {
+      background: linear-gradient(to bottom, #999, #777, #333, #222, #111);
+    }

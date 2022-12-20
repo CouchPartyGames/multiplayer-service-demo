@@ -15,38 +15,44 @@ spec:
   revisionHistoryLimit: 3
 
   sources:
+  - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
+    targetRevision: main
+    ref: myRepo
   - chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: 5.16.9
     helm:
-      values: |
-        crds:
-          install: false
+      valueFiles:
+        - $myRepo/helm/external-values/argocd-local.yaml
 
-        extraObjects: []
-
-        global:
-          image:
-            tag: v2.6.0-rc1
-          logging:
-            format: json
-
-        configs:
-          cm:
-            exec.enabled: false
-            url: 'localhost'
-
-          params:
-            server.enable.gzip: true
-
-          styles: |
-            .sidebar {
-              background: linear-gradient(#e66465, #9198e5);
-            }
-            .nav-bar {
-              background: linear-gradient(to bottom, #999, #777, #333, #222, #111);
-            }
-
+#      values: |
+#        crds:
+#          install: false
+#
+#        extraObjects: []
+#
+#        global:
+#          image:
+#            tag: v2.6.0-rc1
+#          logging:
+#            format: json
+#
+#        configs:
+#          cm:
+#            exec.enabled: false
+#            url: 'localhost'
+#
+#          params:
+#            server.enable.gzip: true
+#
+#          styles: |
+#            .sidebar {
+#              background: linear-gradient(#e66465, #9198e5);
+#            }
+#            .nav-bar {
+#              background: linear-gradient(to bottom, #999, #777, #333, #222, #111);
+#            }
+#
 
   destination:
     name: in-cluster
