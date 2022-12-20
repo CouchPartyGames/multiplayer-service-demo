@@ -16,7 +16,7 @@ spec:
     ref: myRepo
   - chart: open-match
     repoURL: https://open-match.dev/chart/stable
-    targetRevision: 1.5.0
+    targetRevision: 1.6.0
     helm:
       valueFiles:
       - $myRepo/helm/external-values/open-match-local.yaml
