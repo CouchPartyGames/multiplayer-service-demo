@@ -14,12 +14,16 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: https://fluent.github.io/helm-charts
-    targetRevision: 0.20.9
+  sources:
+  - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
+    targetRevision: main 
+    ref: myRepo
+  - repoURL: https://fluent.github.io/helm-charts
+    targetRevision: 0.21.6
     chart: fluent-bit
-    #helm:
-    #  values: |
+    helm:
+      valueFiles:
+      - $myRepo/helm/external-values/fluent-bit-local.yaml
 
   destination:
     name: in-cluster
