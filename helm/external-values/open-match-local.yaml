@@ -1,2 +1,9 @@
+global:
+  telemetry:
+    jaeger:
+      enabled: true
+
 open-match-override:
   enable: "true"
+
+
