@@ -1,0 +1,39 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: open-match-appset
+  namespace: argocd
+
+  labels:
+    environment: local
+spec:
+  project: matchmaking-local
+
+  source:
+    chart: open-match
+    repoURL: https://open-match.dev/chart/stable
+    targetRevision: 1.5.0
+  sources:
+  - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
+    targetRevision: main 
+    path: helm/external-values
+    helm:
+      valueFiles:
+      - open-match-local.yaml
+    
+
+
+  destination:
+    name: in-cluster
+    namespace: open-match
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 3
