@@ -1,0 +1,15 @@
+agones:
+  controller:
+	generateTLS: false
+  allocator:
+	generateTLS: false
+	generateClientTLS: false
+  ping:
+	install: false
+  crds:
+	cleanupOnDelete: false
+  featureGates: "PlayerTracking=true"
+
+gameservers:
+  namespaces:
+	- default
