@@ -16,6 +16,7 @@ spec:
 
   sourceRepos:
   - 'https://couchpartygames.github.io/fleet'
+  - 'git@github.com:CouchPartyGames/multiplayer-service-demo.git'
 
   destinations:
   - namespace: '!agones-system'

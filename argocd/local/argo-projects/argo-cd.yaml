@@ -17,18 +17,24 @@ spec:
   source:
     chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 5.16.0
+    targetRevision: 5.16.9
     helm:
       values: |
+        crds:
+          install: false
+
         extraObjects: []
 
         global:
+          image:
+            tag: v2.6.0-rc1
           logging:
             format: json
 
         configs:
           cm:
             exec.enabled: false
+            url: 'localhost'
 
           params:
             server.enable.gzip: true

@@ -1,0 +1,42 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: agones-local-multi
+  namespace: argocd
+
+  labels:
+    environment: local
+spec:
+  project: hosting-local
+
+  revisionHistoryLimit: 3
+
+  source:
+    repoURL: https://agones.dev/chart/stable
+    chart: agones
+    targetRevision: 1.28.0
+
+  sources:
+  - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
+    targetRevision: main 
+    path: helm/external-values
+    helm:
+      valueFiles:
+      - agones-local.yaml
+
+  destination:
+    name: in-cluster
+    namespace: agones-system
+
+  syncPolicy:
+    #automated: {}
+      #prune: true
+      #selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 15s

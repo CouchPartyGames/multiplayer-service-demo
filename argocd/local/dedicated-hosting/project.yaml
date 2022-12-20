@@ -15,6 +15,7 @@ spec:
 
   sourceRepos:
   - 'https://agones.dev/chart/stable'
+  - 'git@github.com:CouchPartyGames/multiplayer-service-demo.git'
 
   destinations:
   - namespace: agones-system
