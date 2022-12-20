@@ -23,17 +23,16 @@ spec:
 
   revisionHistoryLimit: 4
 
-  source:
-    repoURL: https://couchpartygames.github.io/cpg-helm
-    targetRevision: 1.0.9
-    chart: fleet
   sources:
     - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
       targetRevision: main
-      path: helm/external-values
+      ref: myRepo
+    - repoURL: https://couchpartygames.github.io/cpg-helm
+      targetRevision: 1.0.9
+      chart: fleet
       helm:
         valueFiles:
-        - simple-game-local.yaml
+        - $myRepo/helm/external-values/simple-game-local.yaml
 
 
   destination:
