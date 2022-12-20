@@ -17,6 +17,7 @@ spec:
   # Allow manifests to deploy from any Git repos
   sourceRepos:
   - https://argoproj.github.io/argo-helm
+  - 'git@github.com:CouchPartyGames/multiplayer-service-demo.git'
 
   destinations:
   - namespace: argocd
