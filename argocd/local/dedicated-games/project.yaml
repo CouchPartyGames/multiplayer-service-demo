@@ -15,7 +15,7 @@ spec:
   description: Dedicated Game Hosting for Local Environment
 
   sourceRepos:
-  - 'https://couchpartygames.github.io/fleet'
+  - 'https://couchpartygames.github.io/cpg-helm'
   - 'git@github.com:CouchPartyGames/multiplayer-service-demo.git'
 
   destinations:
