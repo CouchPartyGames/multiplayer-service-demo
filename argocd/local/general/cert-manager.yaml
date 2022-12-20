@@ -7,9 +7,6 @@ metadata:
   name: cert-manager
   namespace: argocd
 
-
-  #finalizers:
-  #  - resources-finalizer.argocd.argoproj.io
   labels:
     environment: local
     purpose: certificates
@@ -17,17 +14,16 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: https://charts.jetstack.io
+  sources:
+  - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
+    targetRevision: main 
+    ref: myRepo
+  - repoURL: https://charts.jetstack.io
     targetRevision: v1.10.1
     chart: cert-manager
     helm:
-      values: |
-        prometheus:
-          enabled: false
-        webhook:
-          timeout: 30
-        installCRDs: true
+      valueFiles: 
+      - $myRepo/helm/external-values/cert-manager-local.yaml
 
   destination:
     name: in-cluster
@@ -40,4 +36,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ApplyOutOfSyncOnly=true
-
