@@ -10,10 +10,6 @@ metadata:
 spec:
   project: matchmaking-local
 
-  source:
-    chart: open-match
-    repoURL: https://open-match.dev/chart/stable
-    targetRevision: 1.5.0
   sources:
   - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
     targetRevision: main 
@@ -24,9 +20,6 @@ spec:
     helm:
       valueFiles:
       - $myRepo/helm/external-values/open-match-local.yaml
-
-    
-
 
   destination:
     name: in-cluster
