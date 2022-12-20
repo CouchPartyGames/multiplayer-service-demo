@@ -1,0 +1,33 @@
+
+fleet:
+  name: "simple-game-server"
+  replicas: 1
+  labels:
+    game-name: simple-game-server
+    game-version: 0.13
+    game-company: CouchPartyGames
+    region: local
+    environment: local
+
+
+gameServer:
+  container:
+  - name: "simple"
+    image: gcr.io/agones-images/simple-game-server
+    tag: 0.13
+    port:
+      containerPort: 7654
+      protocol: UDP
+    resources:
+      requests:
+        memory: 125Mi
+        cpu: 100m
+      limits:
+        memory: 512Mi
+        cpu: 500m
+
+
+autoScaler:
+  enabled: false
+  type: "webhook"
+  webhook: {}

@@ -24,51 +24,17 @@ spec:
   revisionHistoryLimit: 4
 
   source:
-    repoURL: https://couchpartygames.github.io/fleet
+    repoURL: https://couchpartygames.github.io/cpg-helm
     targetRevision: 1.0.9
     chart: fleet
-    helm:
-      values: |
-        fleet:
-          name: "simple-game-server"
-          replicas: 1
-          labels:
-            game-name: simple-game-server
-            game-version: 0.13
-            game-company: CouchPartyGames
-            region: local
-            environment: local
+  sources:
+    - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
+      targetRevision: main
+      path: helm/external-values
+      helm:
+        valueFiles:
+        - simple-game-local.yaml
 
-
-        gameServer:
-          container:
-            - name: "simple"
-              image: gcr.io/agones-images/simple-game-server
-              tag: 0.13
-              port:
-                containerPort: 7654
-                protocol: UDP
-              resources:
-                requests:
-                  memory: 125Mi
-                  cpu: 100m
-                limits:
-                  memory: 512Mi
-                  cpu: 500m
-
-          
-        autoScaler:
-          enabled: false
-          type: "webhook"
-          webhook: {}
-
-  
-      #externalValueFiles:
-      #  - repoURL: 'git@bitbucket.org:repo3/path.git'
-      #    targetRevision: main
-      #    valueFiles:
-      #      - games/marble-madness/fleet.yaml
-      #      - games/marble-madness/secrets.yaml
 
   destination:
     name: in-cluster
