@@ -17,10 +17,14 @@ spec:
   sources:
   - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
     targetRevision: main 
-    path: helm/external-values
+    ref: myRepo
+  - chart: open-match
+    repoURL: https://open-match.dev/chart/stable
+    targetRevision: 1.5.0
     helm:
       valueFiles:
-      - open-match-local.yaml
+      - $myRepo/helm/external-values/open-match-local.yaml
+
     
 
 
