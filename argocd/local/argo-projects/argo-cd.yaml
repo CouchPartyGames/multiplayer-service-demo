@@ -14,8 +14,8 @@ spec:
 
   revisionHistoryLimit: 3
 
-  source:
-    chart: argo-cd
+  sources:
+  - chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: 5.16.9
     helm:
