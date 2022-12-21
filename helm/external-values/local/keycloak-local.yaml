@@ -2,8 +2,10 @@
 
 auth:
   adminPassword: "password"
-  existingSecret: "keycloak"
-  passwordSecretKey: "admin-password"
+  # Secret
+  #existingSecret: "keycloak"
+  # Key to find password from the Secret
+  #passwordSecretKey: "admin-password"
 
 autoscaling:
   enabled: false
