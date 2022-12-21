@@ -18,9 +18,6 @@ configs:
     server.enable.gzip: true
 
   styles: |
-    .sidebar {
-      background: linear-gradient(#e66465, #9198e5);
-    }
-    .nav-bar {
+    .sidebar, .nav-bar {
       background: linear-gradient(to bottom, #999, #777, #333, #222, #111);
     }
