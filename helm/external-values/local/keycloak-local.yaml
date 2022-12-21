@@ -1,3 +1,10 @@
+# helm show values bitnami/keycloak
+
+auth:
+  adminPassword: "password"
+  existingSecret: "keycloak"
+  passwordSecretKey: "admin-password"
+
 autoscaling:
   enabled: false
   minReplicas: 1
