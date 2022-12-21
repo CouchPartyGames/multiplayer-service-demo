@@ -23,11 +23,11 @@ spec:
     chart: keycloak
     helm:
       valueFiles:
-      - $myRepo/helm/external-values/keycloak-local.yaml
+      - $myRepo/helm/external-values/local/keycloak-local.yaml
 
   destination:
     name: in-cluster
-    namespace: cert-manager
+    namespace: keycloak
 
   syncPolicy:
     automated:

@@ -23,7 +23,7 @@ spec:
     chart: fluent-bit
     helm:
       valueFiles:
-      - $myRepo/helm/external-values/fluent-bit-local.yaml
+      - $myRepo/helm/external-values/local/fluent-bit-local.yaml
 
   destination:
     name: in-cluster
