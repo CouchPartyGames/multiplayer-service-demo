@@ -9,11 +9,16 @@ global:
 extraDeploy: []
 
 auth:
+  adminUser: "user"
   adminPassword: "password"
   # Secret
   #existingSecret: "keycloak"
   # Key to find password from the Secret
   #passwordSecretKey: "admin-password"
+
+
+tls:
+  enabled: false
 
 autoscaling:
   enabled: false
@@ -30,11 +35,17 @@ service:
 ingress:
   enabled: false
 
+networkPolicy:
+  enabled: false
 
 postgresql:
   enabled: true
   auth:
     postgresPassword: password
+    username: keycloak
     password: bn-password
     database: keycloak
 
+logging:
+  output: json
+  level: DEBUG
