@@ -12,7 +12,7 @@ metadata:
     purpose: database
 
 spec:
-  project: default
+  project: authentication
 
   sources:
   - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
