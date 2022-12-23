@@ -16,7 +16,10 @@ auth:
   adminPassword: "pass123"
 
 
-extraEnvVars: []
+extraEnvVars:
+  - name: BITNAMI_DEBUG
+    value: true
+
   #- name: JGROUPS_DISCOVERY_PROTOCOL
     #key: dns.DNS_PING
 
