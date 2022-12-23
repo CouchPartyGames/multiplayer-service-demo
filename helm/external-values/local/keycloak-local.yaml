@@ -10,12 +10,10 @@ extraDeploy: []
 
 
 auth:
-  adminUser: "user"
-  adminPassword: "password"
-  # Secret
-  #existingSecret: "keycloak"
-  # Key to find password from the Secret
-  #passwordSecretKey: "admin-password"
+  # Keycloak Admin user
+  adminUser: "user@user.com"
+  # Keycloak Admin Password
+  adminPassword: "pass123"
 
 
 extraEnvVars: []
@@ -46,7 +44,8 @@ networkPolicy:
 postgresql:
   enabled: true
   auth:
-    postgresPassword: "admin"
+    # Password for the "postgres" admin user
+    postgresPassword: "admin-pw"
     username: "keycloak"
     password: "keycloak-pw"
     database: "keycloak"
