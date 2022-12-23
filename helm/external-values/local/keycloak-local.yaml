@@ -8,6 +8,7 @@ global:
 
 extraDeploy: []
 
+
 auth:
   adminUser: "user"
   adminPassword: "password"
@@ -16,6 +17,8 @@ auth:
   # Key to find password from the Secret
   #passwordSecretKey: "admin-password"
 
+
+extraEnvVars: []
 
 tls:
   enabled: false
@@ -48,4 +51,4 @@ postgresql:
 
 logging:
   output: json
-  level: DEBUG
+  level: INFO
