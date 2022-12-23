@@ -42,13 +42,20 @@ networkPolicy:
   enabled: false
 
 postgresql:
-  enabled: true
-  auth:
+  enabled: false
+  #auth:
     # Password for the "postgres" admin user
-    postgresPassword: "admin-pw"
-    username: "keycloak"
-    password: "keycloak-pw"
-    database: "keycloak"
+    #postgresPassword: "admin-pw"
+    #username: "keycloak"
+    #password: "keycloak-pw"
+    #database: "keycloak"
+
+
+externalDatabase:
+  host: postgresql
+  user: keycloak
+  password: keycloak
+
 
 logging:
   output: json
