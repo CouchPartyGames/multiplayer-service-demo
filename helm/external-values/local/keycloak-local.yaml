@@ -2,64 +2,36 @@
 #
 # https://artifacthub.io/packages/helm/bitnami/keycloak
 
-global:
-  storageClass: ""
+replicas: 1
 
-
-extraDeploy: []
-
-
-auth:
-  # Keycloak Admin user
-  adminUser: "user@user.com"
-  # Keycloak Admin Password
-  adminPassword: "pass123"
-
-
-extraEnvVars:
-  - name: BITNAMI_DEBUG
-    value: true
-
-  #- name: JGROUPS_DISCOVERY_PROTOCOL
-    #key: dns.DNS_PING
-
-tls:
-  enabled: false
 
 autoscaling:
   enabled: false
-  minReplicas: 1
-  maxReplicas: 11
 
 
-service:
-  type: ClusterIP
-  http:
-    enable: true
+extraEnv: |
+  - name: KEYCLOAK_ADMIN
+    value: admin
+  - name: KEYCLOAK_ADMIN_PASSWORD
+    value: "admin"
 
 
-ingress:
-  enabled: false
+#  - name: KEYCLOAK_ADMIN_PASSWORD
+#    valueFrom:
+#      secretKeyRef:
+#        name: keycloak-admin-password
+#        key: password
 
-networkPolicy:
-  enabled: false
+dbchecker:
+  enabled: true
 
-postgresql:
-  enabled: false
-  #auth:
-    # Password for the "postgres" admin user
-    #postgresPassword: "admin-pw"
-    #username: "keycloak"
-    #password: "keycloak-pw"
-    #database: "keycloak"
-
-
-externalDatabase:
-  host: postgresql.keycloak.svc.cluster.local
-  user: keycloak
+database:
+  vendor: postgres
+  hostname: postgresql.keycloak.svc.cluster.local
+  port: 5432
+  username: keycloak
   password: keycloak
+  database: keycloak
 
-
-logging:
-  output: json
-  level: INFO
+metrics:
+  enabled: false
