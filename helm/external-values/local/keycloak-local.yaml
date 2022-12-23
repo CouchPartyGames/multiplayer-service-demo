@@ -25,3 +25,16 @@ service:
   type: ClusterIP
   http:
     enable: true
+
+
+ingress:
+  enabled: false
+
+
+postgresql:
+  enabled: true
+  auth:
+    postgresPassword: password
+    password: bn-password
+    database: keycloak
+
