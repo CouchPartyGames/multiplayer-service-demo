@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CPU="4"
-MEMORY="6144"
+CPU="6"
+MEMORY="8192"
 K8S_VERSION="v1.24.3"
 
 NAME=""

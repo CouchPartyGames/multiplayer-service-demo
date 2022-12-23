@@ -41,10 +41,10 @@ networkPolicy:
 postgresql:
   enabled: true
   auth:
-    postgresPassword: password
-    username: keycloak
-    password: bn-password
-    database: keycloak
+    postgresPassword: "password"
+    username: "keycloak"
+    password: "bn-password"
+    database: "keycloak"
 
 logging:
   output: json
