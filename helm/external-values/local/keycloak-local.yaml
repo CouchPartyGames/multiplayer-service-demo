@@ -1,4 +1,12 @@
 # helm show values bitnami/keycloak
+#
+# https://artifacthub.io/packages/helm/bitnami/keycloak
+
+global:
+  storageClass: ""
+
+
+extraDeploy: []
 
 auth:
   adminPassword: "password"
@@ -11,3 +19,9 @@ autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 11
+
+
+service:
+  type: ClusterIP
+  http:
+    enable: true
