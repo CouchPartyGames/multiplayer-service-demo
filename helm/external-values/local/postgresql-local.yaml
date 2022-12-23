@@ -3,4 +3,12 @@
 global:
   postgresql:
     auth:
+      # Password for the "postgres" admin user 
       postgresPassword: pgpass
+
+      # custom user
+      username: keycloak
+      password: keycloak
+      database: bitnami_keycloak
+
+
