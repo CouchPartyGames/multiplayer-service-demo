@@ -4,12 +4,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: keycloak
+  name: postgresql
   namespace: argocd
 
   labels:
     environment: local
-    purpose: identity
+    purpose: database
 
 spec:
   project: default
@@ -19,11 +19,11 @@ spec:
     targetRevision: main 
     ref: myRepo
   - repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 13.0.0 
-    chart: keycloak
+    targetRevision: 12.1.6
+    chart: postgresql
     helm:
       valueFiles:
-      - $myRepo/helm/external-values/local/keycloak-local.yaml
+      - $myRepo/helm/external-values/local/postgresql-local.yaml
 
   destination:
     name: in-cluster
