@@ -19,6 +19,8 @@ auth:
 
 
 extraEnvVars: []
+  #- name: JGROUPS_DISCOVERY_PROTOCOL
+    #key: dns.DNS_PING
 
 tls:
   enabled: false
@@ -44,9 +46,9 @@ networkPolicy:
 postgresql:
   enabled: true
   auth:
-    postgresPassword: "password"
+    postgresPassword: "admin"
     username: "keycloak"
-    password: "bn-password"
+    password: "keycloak-pw"
     database: "keycloak"
 
 logging:
