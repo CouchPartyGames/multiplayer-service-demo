@@ -12,3 +12,12 @@ global:
       database: bitnami_keycloak
 
 
+
+image:
+  registry: docker.io
+  repository: bitnami/postgresql
+  tag: 15.1.0-debian-11-r12
+
+
+auth:
+  enablePostgresUser: true
