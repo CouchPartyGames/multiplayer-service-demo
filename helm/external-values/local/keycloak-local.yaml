@@ -52,7 +52,7 @@ postgresql:
 
 
 externalDatabase:
-  host: postgresql
+  host: postgresql.svc.keycloak.cluster.local
   user: keycloak
   password: keycloak
 
