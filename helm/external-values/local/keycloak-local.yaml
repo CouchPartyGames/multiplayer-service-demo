@@ -38,7 +38,7 @@ database:
   port: 5432
   username: keycloak
   password: keycloak
-  database: keycloak
+  database: bitnami_keycloak
 
 metrics:
   enabled: false

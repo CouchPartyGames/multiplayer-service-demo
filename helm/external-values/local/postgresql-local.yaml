@@ -1,4 +1,5 @@
 # 
+# https://github.com/bitnami/charts/issues/2759
 
 global:
   postgresql:
@@ -21,3 +22,12 @@ image:
 
 auth:
   enablePostgresUser: true
+  database: bitnami_keycloak
+
+
+#primary:
+#  initdb:
+#    scripts:
+
+
+architecture: standalone
