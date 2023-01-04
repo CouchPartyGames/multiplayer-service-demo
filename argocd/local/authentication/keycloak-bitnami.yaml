@@ -1,0 +1,38 @@
+---
+# 
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: argocd
+
+  labels:
+    environment: local
+    purpose: identity
+
+spec:
+  project: authentication
+
+  sources:
+  - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
+    targetRevision: main 
+    ref: myRepo
+  - repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 13.0.0
+    chart: keycloak
+    helm:
+      valueFiles:
+      - $myRepo/helm/external-values/local/keycloak-local.yaml
+
+  destination:
+    name: in-cluster
+    namespace: keycloak
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
