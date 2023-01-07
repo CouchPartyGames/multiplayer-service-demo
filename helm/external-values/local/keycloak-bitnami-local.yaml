@@ -1,0 +1,24 @@
+
+initContainers:
+  - name: couchpartyparty-theme
+    image: 
+    command:
+      - sh
+    args:
+      - -c 
+      - |
+        echo "Copy Themes"
+        cp -R /keycloak/themes /themes
+    volumeMounts:
+      - name: theme
+        mountPoint: /themes
+
+
+extraVolumes:
+  - name: custom-themes
+    mountPath: /themes
+
+extraVolumeMounts:
+  - name: theme
+    mountPath: /themes
+    emptyDir: {}
