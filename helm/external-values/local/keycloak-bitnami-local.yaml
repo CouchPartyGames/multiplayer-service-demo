@@ -1,3 +1,6 @@
+auth:
+  adminUser: admin
+  adminPassword: admin
 
 initContainers:
   - name: couchpartyparty-theme
