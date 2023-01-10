@@ -1,0 +1,24 @@
+nameOverride: "postfix"
+
+extraEnv:
+  - name: ALLOW_EMPTY_SENDER_DOMAINS
+    value: "1"
+  - name: LOG_FORMAT
+    value: json
+  #- name: RELAYHOST
+  #  value: 
+  #- name: SASL_RELAYHOST
+  #  value: 
+  #- name: RELAYHOST_USERNAME
+  #  value: 
+  #- name: RELAYHOST_PASSWORD
+  #  value: 
+
+
+config:
+  postfix:
+    smtp_sasl_auth_enable: "yes"
+    smtp_sasl_secrity_options: noanonymous
+    smtp_sasl_tls_security_options: noanonymous
+    smtp_tls_security_level: encrypt
+    header_size_limit: "4096000"
