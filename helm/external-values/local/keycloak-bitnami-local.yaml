@@ -2,26 +2,41 @@ auth:
   adminUser: admin
   adminPassword: admin
 
-initContainers:
-  - name: couchpartyparty-theme
-    image: 
-    command:
-      - sh
-    args:
-      - -c 
-      - |
-        echo "Copy Themes"
-        cp -R /keycloak/themes /themes
-    volumeMounts:
-      - name: theme
-        mountPoint: /themes
+#image:
+#  pullSecrets:
+#    - docker-registry
 
+#initContainers:
+#  - name: custom-themes
+#    image: <your-image>
+#    command: [ "sh", "-c", "cp -vR /keycloak/themes/* /themes" ]
+#    volumeMounts:
+#      - name: custom-themes
+#        mountPoint: /themes
 
 extraVolumes:
   - name: custom-themes
-    mountPath: /themes
+    emptyDir: {}
 
 extraVolumeMounts:
-  - name: theme
-    mountPath: /themes
+  - name: custom-themes
+    mountPath: /opt/bitnami/keycloak/themes
     emptyDir: {}
+
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+
+service:
+  type: ClusterIP
+
+
+cache:
+  # Development environment should be set to false
+  enabled: false
+
+logging:
+  output: json
+  level: INFO
