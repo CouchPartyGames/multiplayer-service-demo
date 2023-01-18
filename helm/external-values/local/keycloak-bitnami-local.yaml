@@ -1,3 +1,5 @@
+# https://artifacthub.io/packages/helm/bitnami/keycloak
+
 auth:
   adminUser: admin
   adminPassword: admin
@@ -32,6 +34,13 @@ autoscaling:
 service:
   type: ClusterIP
 
+postgresql:
+  enabled: true
+  auth:
+    postgresPassword: asdfeafoasfjal
+    username: keycloak
+    password: hello123
+    database: keycloak
 
 cache:
   # Development environment should be set to false
