@@ -1,0 +1,11 @@
+# https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx
+
+controller:
+  ingressClassResource:
+    name: external-nginx
+  admissionWebhooks:
+    enabled: false
+  # Required for ACME (Let's Encrypt)
+  watchIngressWithoutClass: true
+  extraArgs:
+    ingress-class: external-nginx
