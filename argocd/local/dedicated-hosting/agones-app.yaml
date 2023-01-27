@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://agones.dev/chart/stable
     chart: agones
-    targetRevision: 1.28.0
+    targetRevision: 1.29.0
 
   sources:
   - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
