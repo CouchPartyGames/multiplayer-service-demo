@@ -3,3 +3,4 @@ prometheus:
 webhook:
   timeout: 30
 installCRDs: true
+replicas: 2
