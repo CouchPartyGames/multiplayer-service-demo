@@ -20,10 +20,10 @@ spec:
     ref: myRepo
   - chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 5.19.14
+    targetRevision: 5.19.15
     helm:
       valueFiles:
-        - $myRepo/helm/external-values/argocd-local.yaml
+        - $myRepo/helm/external-values/local/argocd-local.yaml
         #- secrets+age-import-kubernetes://<namespace>/<secret-name>#<key-name>.txt?<relative/path/to/the/encrypted/secrets.yaml>
         #- secrets+age-import-kubernetes://argocd/argocd-sops-age#age.txt?
 
