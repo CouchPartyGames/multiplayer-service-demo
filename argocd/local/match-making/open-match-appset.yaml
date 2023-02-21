@@ -13,7 +13,7 @@ spec:
       elements: 
       - cluster: "in-cluster"
         region: "local"
-        version: "1.5.0"
+        version: "1.7.0"
   template:
     metadata:
       name: 'open-match-{{region}}'
