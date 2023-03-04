@@ -12,7 +12,6 @@ metadata:
 spec:
   project: argo-projects
 
-  revisionHistoryLimit: 3
 
   sources:
   - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
@@ -20,13 +19,12 @@ spec:
     ref: myRepo
   - chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 5.23.1
+    targetRevision: 5.24.1
     helm:
       valueFiles:
         - $myRepo/helm/external-values/local/argocd-local.yaml
         #- secrets+age-import-kubernetes://<namespace>/<secret-name>#<key-name>.txt?<relative/path/to/the/encrypted/secrets.yaml>
         #- secrets+age-import-kubernetes://argocd/argocd-sops-age#age.txt?
-
 
   destination:
     name: in-cluster
@@ -38,3 +36,5 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ApplyOutOfSyncOnly=true
+
+  revisionHistoryLimit: 3
