@@ -7,3 +7,7 @@ open-match-override:
   enable: "true"
 
 
+open-match-core:
+  swaggerui:
+    enabled: true
+
