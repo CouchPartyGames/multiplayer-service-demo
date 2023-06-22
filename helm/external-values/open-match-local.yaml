@@ -1,3 +1,5 @@
+# open match
+
 global:
   telemetry:
     jaeger:
@@ -8,6 +10,8 @@ open-match-override:
 
 
 open-match-core:
+
+  # kubectl port-forward --namespace open-match service/om-swaggerui 51500:51500
   swaggerui:
     enabled: true
 
