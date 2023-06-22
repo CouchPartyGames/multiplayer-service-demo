@@ -1,8 +1,12 @@
 # https://artifacthub.io/packages/helm/bitnami/keycloak
+#
+# https://blog.brakmic.com/keycloak-with-postgresql-ha-on-kubernetes/
 
 auth:
   adminUser: admin
   adminPassword: admin
+  existingSecret: ""
+  passwordSecretKey: "admin-password"
 
 #image:
 #  pullSecrets:
@@ -14,7 +18,13 @@ auth:
 #    command: [ "sh", "-c", "cp -vR /keycloak/themes/* /themes" ]
 #    volumeMounts:
 #      - name: custom-themes
-#        mountPoint: /themes
+#        mountPoint: /themes 
+#  - name: custom-extensions
+#    image: ghcr.io/couchpartygames/
+#    command: [ "sh", "-c", "cp -vR /keycloak/extensions/* /extensions" ]
+#    volumeMounts:
+#      - name: custom-extensions
+#        mountPoint: /extensions
 
 extraVolumes:
   - name: custom-themes
@@ -36,11 +46,25 @@ service:
 
 postgresql:
   enabled: true
+  #enabled: false
   auth:
     postgresPassword: asdfeafoasfjal
     username: keycloak
     password: hello123
     database: keycloak
+
+externalDatabase:
+  host: ""
+  port: 5432
+  user: "postgres"
+  password: null
+  existingSecret: "postgresql-secret"
+  existingSecretPasswordKey: "password"
+  database: "postgres"
+
+#persistence:
+#  enabled: true
+#  size: "8Gi"
 
 cache:
   # Development environment should be set to false

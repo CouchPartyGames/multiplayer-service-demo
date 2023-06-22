@@ -2,32 +2,31 @@
 #
 # https://artifacthub.io/packages/helm/bitnami/keycloak
 
-replicas: 1
 
+
+
+
+auth:
+  adminUser: "admin"
+  existingSecret: "keycloak-admin-password"
+  passwordSecretKey: "password"
+
+production: false
+
+proxy: edge
+
+extraDeploy:
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      name: keycloak-admin-password
+    data:
+      password: dmFsdWUtMg0KDQo=
 
 autoscaling:
   enabled: false
-
-command:
-  - "/opt/keycloak/bin/kc.sh"
-  - "start-dev"
-  - "--http-enabled=true"
-  - "--http-port=8080"
-  - "--hostname-strict=false"
-  - "--hostname-strict-https=false"
-
-extraEnv: |
-  - name: KEYCLOAK_ADMIN
-    value: admin
-  - name: KEYCLOAK_ADMIN_PASSWORD
-    value: "admin"
-
-
-#  - name: KEYCLOAK_ADMIN_PASSWORD
-#    valueFrom:
-#      secretKeyRef:
-#        name: keycloak-admin-password
-#        key: password
+  minReplicas: 1
+  maxReplicas: 5
 
 dbchecker:
   enabled: true
@@ -42,3 +41,41 @@ database:
 
 metrics:
   enabled: false
+
+
+# https://artifacthub.io/packages/helm/bitnami/keycloak#keycloak-statefulset-parameters
+replicas: 1
+
+     
+#initContainers:
+#  - name: custom-themes
+#    image: <your-image>
+#    command: [ "sh", "-c", "cp -vR /keycloak/themes/* /themes" ]
+#    volumeMounts:
+#      - name: custom-themes
+#        mountPoint: /themes 
+#  - name: custom-extensions
+#    image: ghcr.io/couchpartygames/
+#    command: [ "sh", "-c", "cp -vR /keycloak/extensions/* /extensions" ]
+#    volumeMounts:
+#      - name: custom-extensions
+#        mountPoint: /extensions
+
+extraVolumes:
+  - name: custom-themes
+    emptyDir: {}
+  - name: custom-extensions
+    emptyDir: {}
+
+extraVolumeMounts:
+  - name: custom-themes
+    mountPath: /opt/bitnami/keycloak/themes
+    emptyDir: {}
+
+cache:
+  # Development environment should be set to false
+  enabled: false
+
+logging:
+  output: json
+  level: INFO
