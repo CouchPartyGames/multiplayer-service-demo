@@ -16,7 +16,7 @@ spec:
     ref: myRepo
   - repoURL: https://agones.dev/chart/stable
     chart: agones
-    targetRevision: 1.31.0
+    targetRevision: 1.38.0
     helm:
       valueFiles:
       - $myRepo/agones-local.yaml

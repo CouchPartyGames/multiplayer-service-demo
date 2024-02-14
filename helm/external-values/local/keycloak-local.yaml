@@ -3,9 +3,6 @@
 # https://artifacthub.io/packages/helm/bitnami/keycloak
 
 
-
-
-
 auth:
   adminUser: "admin"
   existingSecret: "keycloak-admin-password"
@@ -46,31 +43,27 @@ metrics:
 # https://artifacthub.io/packages/helm/bitnami/keycloak#keycloak-statefulset-parameters
 replicas: 1
 
+initdbScripts:
+  add-providers-themes.sh: |
+    #!/bin/bash
+    echo "Installing Themes/Providers"
+    cp -v /providers/*.jar /opt/bitnami/keycloak/providers
      
-#initContainers:
-#  - name: custom-themes
-#    image: <your-image>
-#    command: [ "sh", "-c", "cp -vR /keycloak/themes/* /themes" ]
-#    volumeMounts:
-#      - name: custom-themes
-#        mountPoint: /themes 
-#  - name: custom-extensions
-#    image: ghcr.io/couchpartygames/
-#    command: [ "sh", "-c", "cp -vR /keycloak/extensions/* /extensions" ]
-#    volumeMounts:
-#      - name: custom-extensions
-#        mountPoint: /extensions
+initContainers:
+  - name: custom-providers
+    image: ghcr.io/couchpartygames/keycloak-extras:0.0.5
+    command: [ "sh", "-c", "cp -v /keycloak/providers/*.jar /providers 2> /dev/null || : " ]
+    volumeMounts:
+      - name: custom-providers
+        mountPath: /providers
 
 extraVolumes:
-  - name: custom-themes
-    emptyDir: {}
-  - name: custom-extensions
+  - name: custom-providers
     emptyDir: {}
 
 extraVolumeMounts:
-  - name: custom-themes
-    mountPath: /opt/bitnami/keycloak/themes
-    emptyDir: {}
+  - name: custom-providers
+    mountPath: /providers
 
 cache:
   # Development environment should be set to false
