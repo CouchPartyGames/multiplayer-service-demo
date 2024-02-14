@@ -1,15 +1,35 @@
+# https://github.com/googleforgames/agones/blob/main/install/helm/agones/values.yaml
+
 agones:
   controller:
     generateTLS: false
+
   allocator:
     generateTLS: false
     generateClientTLS: false
+
   ping:
     install: false
-  crds:
-    cleanupOnDelete: false
+
   featureGates: "PlayerTracking=true"
+
+  crds:
+    install: true
+    cleanupOnDelete: true
+    cleanupJobTTL: 60
+
+  metrics:
+    prometheusEnabled: false
+    prometheusServiceDiscovery: false
+    stackdriverEnabled: false
+    stackdriverProjectID: ""
+    stackdriverLabels: ""
+    serviceMonitor:
+      enabled: false
+      interval: 30s
 
 gameservers:
   namespaces:
   - default
+  minPort: 6000
+  maxPort: 8000

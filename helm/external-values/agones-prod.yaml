@@ -1,3 +1,5 @@
+# https://github.com/googleforgames/agones/blob/main/install/helm/agones/values.yaml
+
 agones:
 
   # https://agones.dev/site/docs/guides/feature-stages/#feature-gates
@@ -5,7 +7,19 @@ agones:
 
   metrics:
     prometheusEnabled: true
+    prometheusServiceDiscovery: true
+    stackdriverEnabled: false
+    stackdriverProjectID: ""
+    stackdriverLabels: ""
+    serviceMonitor:
+      enabled: false
+      interval: 30s
 
+
+  crds:
+    install: true
+    cleanupOnDelete: true
+    cleanupJobTTL: 60
 
   allocator:
     generateTLS: false
@@ -43,7 +57,6 @@ agones:
 
 
 gameservers:
-
   namespaces:
     - default
     - xbox
