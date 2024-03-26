@@ -1,18 +1,11 @@
 # https://github.com/googleforgames/agones/blob/main/install/helm/agones/values.yaml
+# https://agones.dev/site/docs/installation/install-agones/helm/
 
 agones:
-  controller:
-    generateTLS: false
-
-  allocator:
-    generateTLS: false
-    generateClientTLS: false
-
-  ping:
-    install: false
-
+  
+  # https://agones.dev/site/docs/guides/feature-stages/#feature-gates
   featureGates: "PlayerTracking=true"
-
+  
   crds:
     install: true
     cleanupOnDelete: true
@@ -21,15 +14,43 @@ agones:
   metrics:
     prometheusEnabled: false
     prometheusServiceDiscovery: false
-    stackdriverEnabled: false
-    stackdriverProjectID: ""
-    stackdriverLabels: ""
     serviceMonitor:
       enabled: false
       interval: 30s
+      
+  controller:
+    generateTLS: false
+    logLevel: info
+    
+  ping:
+    install: false
+    replicas: 2
+    http:
+      annotations:
+        region: local
+        provider: minikube
+    udp:
+      annotations:
+        region: local
+        provider: minikube
+
+  allocator:
+    generateTLS: false
+    generateClientTLS: false
+    annotations:
+      region: local
+      provider: minikube
+
+  extensions:
+    logLevel: info
 
 gameservers:
   namespaces:
   - default
   minPort: 6000
   maxPort: 8000
+
+
+# https://agones.dev/site/docs/installation/install-agones/helm/#helm-installation
+helm:
+  installTests: false

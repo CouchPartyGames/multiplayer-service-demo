@@ -18,7 +18,7 @@ extraDeploy:
     metadata:
       name: keycloak-admin-password
     data:
-      password: dmFsdWUtMg0KDQo=
+      password: cGFydHk=
 
 autoscaling:
   enabled: false
@@ -33,8 +33,8 @@ database:
   hostname: postgresql.keycloak.svc.cluster.local
   port: 5432
   username: keycloak
-  password: keycloak
-  database: bitnami_keycloak
+  password: party
+  database: keycloak
 
 metrics:
   enabled: false

@@ -1,5 +1,6 @@
 # open match
 # https://github.com/googleforgames/open-match/blob/main/install/helm/open-match/values.yaml
+# https://github.com/googleforgames/open-match/blob/main/install/helm/open-match/values-production.yaml
 # https://openmatch.dev/site/docs/installation/helm/#configuration
 
 global:
@@ -28,14 +29,14 @@ open-match-core:
   enabled: true
   # kubectl port-forward --namespace open-match service/om-swaggerui 51500:51500
   swaggerui:
-    enabled: true
+    enabled: false
 
 
 open-match-override:
   enable: true
 
 open-match-telemetry:
-  enabled: false
+  enabled: true
 
 open-match-scale:
-  enabled: false
+  enabled: true

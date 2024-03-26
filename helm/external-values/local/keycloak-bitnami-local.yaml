@@ -12,7 +12,7 @@ auth:
 #  pullSecrets:
 #    - docker-registry
 
-#initContainers:
+initContainers:
 #  - name: custom-themes
 #    image: <your-image>
 #    command: [ "sh", "-c", "cp -vR /keycloak/themes/* /themes" ]
