@@ -1,0 +1,36 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+
+  labels:
+    environment: local
+    purpose: certificates
+
+spec:
+  project: default
+
+  sources:
+  - repoURL: git@github.com:CouchPartyGames/multiplayer-service-demo.git
+    targetRevision: main 
+    ref: myRepo
+  - repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 1.7.2
+    chart: tempo
+    helm:
+      valueFiles: 
+      - $myRepo/helm/external-values/local/tempo-local.yaml
+
+  destination:
+    name: in-cluster
+    namespace: monitoring
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true

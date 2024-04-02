@@ -1,0 +1,16 @@
+# https://github.com/grafana/helm-charts/blob/main/charts/tempo/values.yaml
+
+
+serviceMonitor:
+  enabled: true
+
+
+persistence:
+  enabled: true
+  # storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  size: 10Gi
+
+
+podLabels: {}

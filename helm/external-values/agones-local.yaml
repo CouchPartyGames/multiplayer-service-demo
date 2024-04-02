@@ -12,19 +12,23 @@ agones:
     cleanupJobTTL: 60
 
   metrics:
-    prometheusEnabled: false
-    prometheusServiceDiscovery: false
+    prometheusEnabled: true
+    prometheusServiceDiscovery: true
     serviceMonitor:
-      enabled: false
+      enabled: true
       interval: 30s
       
   controller:
+    replicas: 1
     generateTLS: false
     logLevel: info
+    annotations:
+      region: local
+      provider: minikube
     
   ping:
     install: false
-    replicas: 2
+    replicas: 1
     http:
       annotations:
         region: local
@@ -35,6 +39,7 @@ agones:
         provider: minikube
 
   allocator:
+    replicas: 1
     generateTLS: false
     generateClientTLS: false
     annotations:
@@ -42,7 +47,11 @@ agones:
       provider: minikube
 
   extensions:
+    replicas: 1
     logLevel: info
+    annotations:
+      region: local
+      provider: minikube
 
 gameservers:
   namespaces:

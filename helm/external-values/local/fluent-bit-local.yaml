@@ -1,10 +1,19 @@
 # https://github.com/fluent/helm-charts/blob/main/charts/fluent-bit/values.yaml
 # https://docs.fluentbit.io/manual/administration/configuring-fluent-bit
 
-podAnnotations:
-  prometheus.io/scrape: "true"
-  prometheus.io/path: /metrics
-  prometheus.io/port: "2021"
+serviceMonitor:
+  enabled: true
+
+
+service:
+  type: ClusterIP
+  port: 2020
+  selector:
+    release: prometheus
+  annotations:
+   prometheus.io/port: "2021"
+   prometheus.io/scrape: "true"
+
 
 config:
   inputs: |
@@ -13,7 +22,7 @@ config:
         Path /var/log/containers/*.log
         multiline.parser docker, cri
         Tag kube.*
-        Mem_Buf_Limit 5MB
+        Mem_Buf_Limit 10MB
         Skip_Long_Lines On
 
     [INPUT]
@@ -22,29 +31,19 @@ config:
         Systemd_Filter _SYSTEMD_UNIT=kubelet.service
         Read_From_Tail On
 
-    [INPUT]
-        name            fluentbit_metrics
-        tag             internal_metrics
-        scrape_interval 2
-
 
   outputs: |
-    [OUTPUT]
-        Name        stdout
-        Match       *
+    #[OUTPUT]
+    #    Name        stdout
+    #    Match       *
 
     [OUTPUT]
-        name        loki
-        match       host.* kube.*
-        host        loki-write
-        port        3100
-        tenant_id   1
+        Name        loki
+        Match       kube.*
+        Host        loki
+        Port        3100
+        Tenant_id   ""
 
-    [OUTPUT]
-        name            prometheus_exporter
-        match           internal_metrics
-        host            0.0.0.0
-        port            2021
 
 
 logLevel: info

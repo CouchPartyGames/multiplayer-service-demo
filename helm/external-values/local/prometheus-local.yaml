@@ -1,1 +1,19 @@
-# 
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+#
+# helm show values prometheus-community/kube-prometheus-stack
+
+
+grafana:
+  enabled: false
+
+extraManifests: []
+
+
+prometheus:
+  enabled: true
+
+  prometheusSpec:
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+
+

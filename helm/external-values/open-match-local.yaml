@@ -5,10 +5,10 @@
 global:
   telemetry:
     jaeger:
-      enabled: true
-    prometheus:
       enabled: false
-      serviceDiscovery: false
+    prometheus:
+      enabled: true
+      serviceDiscovery: true
     grafana:
       enabled: false
     stackdriverMetrics:
@@ -32,10 +32,10 @@ open-match-core:
 
 
 open-match-override:
-  enable: true
+  enable: false
 
 open-match-telemetry:
-  enabled: false
+  enabled: true
 
 open-match-scale:
   enabled: false
