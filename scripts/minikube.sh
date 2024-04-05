@@ -8,5 +8,4 @@ MEMORY="12288"
 
 NAME="openmatch"
 
-minikube start -p $NAME \
- --driver docker --memory $MEMORY --cpus $CPU
+minikube start -p $NAME --driver docker --memory $MEMORY --cpus $CPU

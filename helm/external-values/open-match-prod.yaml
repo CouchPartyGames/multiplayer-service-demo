@@ -6,7 +6,7 @@
 global:
   telemetry:
     jaeger:
-      enabled: true
+      enabled: false
     prometheus:
       enabled: false
       serviceDiscovery: false
@@ -27,6 +27,7 @@ global:
 
 open-match-core:
   enabled: true
+
   # kubectl port-forward --namespace open-match service/om-swaggerui 51500:51500
   swaggerui:
     enabled: false

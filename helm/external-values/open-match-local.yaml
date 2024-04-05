@@ -7,7 +7,7 @@ global:
     jaeger:
       enabled: false
     prometheus:
-      enabled: true
+      enabled: false
       serviceDiscovery: true
     grafana:
       enabled: false
@@ -26,16 +26,60 @@ global:
 
 open-match-core:
   enabled: true
+
+  # Length of time between first fetch matches call, and when no further fetch
+  # matches calls will join the current evaluation/synchronization cycle,
+  # instead waiting for the next cycle.
+  registrationInterval: 250ms
+
+  # Length of time after match function as started before it will be canceled,
+  # and evaluator call input is EOF.
+  proposalCollectionInterval: 20s
+
+  # Time after a ticket has been returned from fetch matches (marked as pending)
+  # before it automatically becomes active again and will be returned by query
+  # calls.
+  pendingReleaseTimeout: 1m
+
+  # Time after a ticket has been assigned before it is automatically delted.
+  assignedDeleteTimeout: 10m
+
+  # Maximum number of tickets to return on a single QueryTicketsResponse.
+  queryPageSize: 10000
+
+  # Duration for redis locks to expire.
+  backfillLockTimeout: 1m
+
+
   # kubectl port-forward --namespace open-match service/om-swaggerui 51500:51500
   swaggerui:
     enabled: true
 
+  redis:
+    enabled: true
+    # If open-match-core.redis.enabled is set to false, have Open Match components talk to this redis address instead.
+    # Otherwise the default is set to the om-redis instance.
+    hostname: 
+    port: 6379
+    user:
+    pool:
+      maxIdle: 200
+      maxActive: 0
+      idleTimeout: 0
+      healthCheckTimeout: 300ms
+  swaggerui:
+    enabled: false
+
 
 open-match-override:
-  enable: false
-
-open-match-telemetry:
   enabled: true
 
+open-match-telemetry:
+  enabled: false
+
 open-match-scale:
+  enabled: false
+
+
+jaeger:
   enabled: false
